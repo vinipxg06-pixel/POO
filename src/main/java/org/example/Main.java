@@ -1,38 +1,30 @@
 package org.example;
 
-import org.example.Interface.Baixavel;
-import org.example.Interface.Reproduzivel;
-import org.example.Midia.Filme;
-import org.example.Midia.Musica;
-import org.example.Utilitarios.ConversorTempo;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.Interface.MeioPagamento;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
-    static void main() {
+    static void main(String[] args) {
 
-        Filme filme = new Filme("4K", "Todo mundo em panico 6", 93);
-        Musica musica = new Musica("CPM22", "Um minuto para o fim do mundo", 4);
+        List<MeioPagamento> pagamentos = new ArrayList<>();
 
-        filme.exibirDetalhes();
-        musica.exibirDetalhes();
+        Pix pix = new Pix(123321);
+        Boleto boleto = new Boleto("Vinicius");
+        CartaoCredito cartaoCredito = new CartaoCredito(567);
 
-        filme.calcularCusto();
-        musica.calcularCusto();
+        pagamentos.add(pix);
+        pagamentos.add(boleto);
+        pagamentos.add(cartaoCredito);
 
-        processarPlayer(filme);
-        processarPlayer(musica);
 
-        filme.realizarDowload();
-
-        ConversorTempo.formatarMinutos(filme.getDuracaoEmMinutos());
-        ConversorTempo.formatarMinutos(musica.getDuracaoEmMinutos());
+        pix.pagar(100);
+        cartaoCredito.pagar(100);
+        boleto.pagar(100);
 
 
 
-    }
-
-    public static void processarPlayer(Reproduzivel item) {
-        item.darPlay();
     }
 }

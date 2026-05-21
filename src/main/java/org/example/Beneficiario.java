@@ -5,30 +5,35 @@ import java.time.Period;
 import java.util.Date;
 
 public abstract class Beneficiario {
-    private static String cpf;
+    private final String cpf;
     private String nome;
     protected LocalDate dataDeNascimento;
-    double mensalidadeBase;
+    protected double mensalidadeBase;
 
-    public Beneficiario(String cpf, String nome, LocalDate dataDeNascimento){
+    public Beneficiario(String nome, String cpf, LocalDate dataDeNascimento){
         this.nome = nome;
-        this.setCpf(cpf);
+        this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    int idade = Period.between(dataDeNascimento, LocalDate.now()).getYears();
+    public int getIdade() {
+        return Period.between(
+                dataDeNascimento,
+                LocalDate.now()
+        ).getYears();
+    }
 
     public String getNome() {
         return nome;
     }
     public double calcularMensalidade(){
-        if (idade<18){
+        if (getIdade()<18){
             mensalidadeBase = 180;
         }
-        if (idade>18 && idade<59){
+        if (getIdade()>18 && getIdade()<59){
             mensalidadeBase = 340;
         }
-        if (idade>=60){
+        if (getIdade()>=60){
             mensalidadeBase = 620;
         }
         return mensalidadeBase;
@@ -41,10 +46,6 @@ public abstract class Beneficiario {
 
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public LocalDate getDataDeNascimento() {
@@ -63,11 +64,24 @@ public abstract class Beneficiario {
         this.mensalidadeBase = mensalidadeBase;
     }
 
-    public int getIdade() {
-        return idade;
-    }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public abstract void mostrarResumo();
+
+
+    public void solicitarCobertura(String tipo) {
+        if (tipo.equals("INTERNACAO") && this instanceof Dependente) {
+            System.out.println("Dependente "+ getNome() +",não pode marcar internação.");
+            System.out.println();
+        } else {
+            System.out.println("--Consulta Marcada--");
+            System.out.println("Data: " + LocalDate.now());
+            System.out.println("Tipo: " + tipo);
+            System.out.println("Beneficiário: " + getNome());
+            System.out.println();
+        }
+
+
+
+
     }
 }

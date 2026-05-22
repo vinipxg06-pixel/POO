@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Dependente extends Beneficiario {
 
-
     public boolean conjuge;
 
     public Dependente(String nome, String cpf, LocalDate dataDeNascimento, boolean conjuge) {
@@ -13,13 +12,12 @@ public class Dependente extends Beneficiario {
         this.mensalidadeBase = calcularMensalidade() - calcularMensalidade() * 0.3;
     }
 
-    public void setConjuge(boolean conjuge) {
-        this.conjuge = conjuge;
-    }
-
     @Override
-    public double getMensalidadeBase() {
-        return mensalidadeBase;
+    public void mostrarResumo() {
+        double totalMensal = 0;
+        System.out.println("Nome: " + getNome());
+        System.out.println("CPF: " + getCpf());
+        System.out.println("Nascimento: " + dataDeNascimento);
     }
 
     @Override
@@ -28,12 +26,8 @@ public class Dependente extends Beneficiario {
     }
 
     @Override
-    public void mostrarResumo() {
-        double totalMensal = 0;
-        System.out.println("Nome: " + getNome());
-        System.out.println("CPF: " + getCpf());
-        System.out.println("Nascimento: " + dataDeNascimento);
-
+    public double getMensalidadeBase() {
+        return mensalidadeBase;
     }
 
     @Override
@@ -43,5 +37,9 @@ public class Dependente extends Beneficiario {
 
     public boolean getConjuge() {
         return conjuge;
+    }
+
+    public void setConjuge(boolean conjuge) {
+        this.conjuge = conjuge;
     }
 }

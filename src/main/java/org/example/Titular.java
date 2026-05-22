@@ -26,13 +26,12 @@ public class Titular extends Beneficiario {
         System.out.println("Aposentado: " + aposentado);
         totalMensal += this.getMensalidadeBase();
         for (int i = 0; i < dependente.size(); i++) {
-            System.out.println("\nDependente " + (i+1) + ":");
-           dependente.get(i).mostrarResumo();
-           totalMensal += dependente.get(i).getMensalidadeBase();
+            System.out.println("\nDependente " + (i + 1) + ":");
+            dependente.get(i).mostrarResumo();
+            totalMensal += dependente.get(i).getMensalidadeBase();
         }
         System.out.printf("Valor mensal total do grupo: %.2f\n", totalMensal);
     }
-
 
     public void adicionarDependente(Dependente NovoDependente) {
         if (this.dependente.size() >= 3) {
@@ -43,20 +42,11 @@ public class Titular extends Beneficiario {
             System.out.println("Dependente adicionado: " + NovoDependente.getNome());
             this.dependente.add(NovoDependente);
         }
-
     }
 
     @Override
     public void solicitarCobertura(String tipo) {
         super.solicitarCobertura(tipo);
-    }
-
-    public boolean getAposentado() {
-        return aposentado;
-    }
-
-    public void setAposentado(boolean aposentado) {
-        this.aposentado = aposentado;
     }
 
     public ArrayList<Dependente> getDependente() {
@@ -65,5 +55,13 @@ public class Titular extends Beneficiario {
 
     public void setDependente(ArrayList<Dependente> dependente) {
         this.dependente = dependente;
+    }
+
+    public boolean getAposentado() {
+        return aposentado;
+    }
+
+    public void setAposentado(boolean aposentado) {
+        this.aposentado = aposentado;
     }
 }
